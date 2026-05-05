@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générateur de Mots de Passe Sécurisés - Service Express</title>
+    
+    <!-- Script Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1805732481707409" crossorigin="anonymous"></script>
+
+    <style>
+        :root { --primary: #007bff; --bg: #f4f7f6; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg); display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; }
+        .container { background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 100%; max-width: 450px; text-align: center; }
+        h1 { color: #333; margin-bottom: 1.5rem; font-size: 1.6rem; }
+        .result-box { background: #f8f9fa; border: 2px dashed #ddd; padding: 20px; border-radius: 10px; margin-bottom: 20px; font-family: monospace; font-size: 1.4rem; color: var(--primary); word-break: break-all; cursor: pointer; transition: all 0.2s; }
+        .result-box:hover { background: #eef2f7; border-color: var(--primary); }
+        .settings { text-align: left; margin-bottom: 25px; }
+        .setting { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-size: 0.95rem; color: #555; }
+        input[type="number"] { width: 50px; padding: 5px; border-radius: 4px; border: 1px solid #ccc; }
+        button { background: var(--primary); color: white; border: none; padding: 15px; border-radius: 8px; cursor: pointer; width: 100%; font-size: 1.1rem; font-weight: bold; transition: opacity 0.2s; }
+        button:hover { opacity: 0.9; }
+        .copy-hint { font-size: 0.8rem; color: #888; margin-top: 5px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Générateur de Mots de Passe</h1>
+    
+    <div class="result-box" id="passwordResult" title="Cliquer pour copier">Générer...</div>
+    <p class="copy-hint">Cliquez sur le mot de passe pour le copier</p>
+
+    <div class="settings">
+        <div class="setting">
+            <label>Longueur (8-32)</label>
+            <input type="number" id="length" min="8" max="32" value="16">
+        </div>
+        <div class="setting">
+            <label>Inclure des Majuscules</label>
+            <input type="checkbox" id="uppercase" checked>
+        </div>
+        <div class="setting">
+            <label>Inclure des Chiffres</label>
+            <input type="checkbox" id="numbers" checked>
+        </div>
+        <div class="setting">
+            <label>Inclure des Symboles</label>
+            <input type="checkbox" id="symbols" checked>
+        </div>
+    </div>
+
+    <button id="generateBtn">Générer Nouveau</button>
+
+    <!-- Zone AdSense -->
+    <div style="margin-top: 30px; min-height: 100px; border-top: 1px solid #eee; padding-top: 20px;">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-1805732481707409"
+             data-ad-slot="auto"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script> (adsbygoogle = window.adsbygoogle || []).push({}); </script>
+    </div>
+</div>
+
+<script>
+    const resultEl = document.getElementById('passwordResult');
+    const lengthEl = document.getElementById('length');
+    const uppercaseEl = document.getElementById('uppercase');
+    const numbersEl = document.getElementById('numbers');
+    const symbolsEl = document.getElementById('symbols');
+    const generateBtn = document.getElementById('generateBtn');
+
+    const randomFunc = {
+        lower: () => String.fromCharCode(Math.floor(Math.random() * 26) + 97),
+        upper: () => String.fromCharCode(Math.floor(Math.random() * 26) + 65),
+        number: () => String.fromCharCode(Math.floor(Math.random() * 10) + 48),
+        symbol: () => "!@#$%^&*(){}[]=<>/,.".charAt(Math.floor(Math.random() * 20))
+    };
+
+    generateBtn.addEventListener('click', () => {
+        const length = +lengthEl.value;
+        const hasUpper = uppercaseEl.checked;
+        const hasNumber = numbersEl.checked;
+        const hasSymbol = symbolsEl.checked;
+        resultEl.innerText = generatePassword(hasUpper, hasNumber, hasSymbol, length);
+    });
+
+    resultEl.addEventListener('click', () => {
+        const pw = resultEl.innerText;
+        if(pw !== "Générer...") {
+            navigator.clipboard.writeText(pw);
+            alert('Mot de passe copié !');
+        }
+    });
+
+    function generatePassword(upper, number, symbol, length) {
+        let pw = '';
+        const typesArr = [{lower: true}, {upper}, {number}, {symbol}].filter(item => Object.values(item)[0]);
+        if(typesArr.length === 0) return 'Sélectionnez une option';
+        for(let i = 0; i < length; i++) {
+            const funcName = Object.keys(typesArr[Math.floor(Math.random() * typesArr.length)])[0];
+            pw += randomFunc[funcName]();
+        }
+        return pw;
+    }
+</script>
+</body>
+</html>
