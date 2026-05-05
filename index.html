@@ -11,31 +11,33 @@
         .container { width:100%; max-width:420px; padding:30px; border-radius:24px; background: rgba(255,255,255,0.05); backdrop-filter: blur(20px); box-shadow: 0 0 50px rgba(99,102,241,0.25); text-align:center; margin-bottom: 30px; }
         h1 { margin-bottom:10px; font-size: 1.8rem; }
         .subtitle { color:#94a3b8; font-size:14px; margin-bottom:20px; }
-        label { display:block; margin-top:20px; font-size:14px; color:#cbd5e1; text-align:left; }
-        input { width:100%; padding:14px; margin-top:10px; border-radius:12px; border:1px solid rgba(255,255,255,0.1); background:#0f172a; color:white; box-sizing: border-box; text-align: center; font-size: 1.2rem; }
+        input { width:100%; padding:14px; margin-top:10px; border-radius:12px; border:1px solid rgba(255,255,255,0.1); background:#0f172a; color:white; box-sizing: border-box; text-align: center; font-size: 1.1rem; outline: none; }
         button { width:100%; padding:14px; margin-top:20px; border-radius:12px; border:none; background: linear-gradient(90deg,#6366f1,#8b5cf6); color:white; font-weight:600; cursor:pointer; transition:0.2s; }
         button:hover { transform: scale(1.02); }
+        .ad-slot { margin: 20px 0; min-height: 100px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px; }
         .seo-content { text-align: left; margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
         .seo-content h2 { font-size: 1.1rem; color: #a78bfa; margin-top: 20px; }
         .seo-content p { font-size: 0.9rem; color: #94a3b8; line-height: 1.5; }
         footer { margin-top: auto; padding: 20px; font-size: 0.8rem; text-align: center; color: #64748b; }
         footer a { color:#94a3b8; text-decoration: none; margin: 0 10px; }
-        .ad-slot { margin: 20px 0; min-height: 100px; }
     </style>
 </head>
 <body>
 <div class="container">
     <h1>🔐 Password Gen</h1>
-    <p class="subtitle">Sécurisez vos comptes instantanément</p>
+    <p class="subtitle">Créez des mots de passe ultra-sécurisés</p>
+
     <div class="ad-slot">
         <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1805732481707409" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
+
     <input type="text" id="passDisplay" readonly placeholder="Cliquer sur Générer">
-    <button onclick="generate()">Générer</button>
+    <button onclick="generate()">Générer Mot de Passe</button>
+
     <div class="seo-content">
-        <h2>Pourquoi un mot de passe fort ?</h2>
-        <p>Un bon mot de passe doit contenir des lettres, chiffres et symboles pour résister aux attaques par force brute.</p>
+        <h2>Sécurité Maximale</h2>
+        <p>Nos algorithmes génèrent des combinaisons aléatoires incluant majuscules, minuscules, chiffres et symboles pour une protection optimale contre le piratage.</p>
     </div>
 </div>
 <script>
